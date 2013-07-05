@@ -1,0 +1,64 @@
+---
+layout: default
+title: Home
+---
+
+<div class="jumbotron">
+  <h1>{{ site.name }}</h1>
+  <p class="lead">{{ site.description }}</p>
+  <a class="btn btn-large btn-success" href="http://techuphq.com/users/{{ site.twitter-username }}">Find us on TechUp HQ</a>
+</div>
+
+<hr>
+
+<div class="row-fluid marketing">
+  <div class="span6" id="event-info"></div>
+  <div class="span6">
+    <h4><a href="https://github.com/{{ site.github-username }}"><i class="icon-github"></i> {{ site.github-username }}</a></h4>
+    <p>Check our GitHub repository for the lastest files for all our events.</p>
+    <h4><a href="https://twitter.com/{{ site.twitter-username }}"><i class="icon-twitter"></i> @{{ site.twitter-username }}</a></h4>
+    <p>Follow us on Twitter for all of the latest event news.</p>
+    <p>
+      <a href="https://twitter.com/{{ site.twitter-username }}" class="twitter-follow-button" data-show-count="false" data-size="large" data-show-screen-name="false" data-dnt="true">Follow @{{ site.twitter-username }}</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    </p>
+  </div>
+</div>
+
+<!-- javascript templates for event info -->
+
+<script id="event_template" type="text/html">
+  <h4><%=header%></h4>
+  <p><strong><%=name%></strong></p>
+  <p><%=date%></p>
+  <p><a href="<%=url%>" class="btn btn-small">View Event Details</a></p>
+</script>
+
+<script id="empty_template" type="text/html">
+  <h4><%=header%></h4>
+  <p><%=subtext%></p>
+</script>
+
+<script src="/js/resig.templates.js"></script>
+<script>
+
+var techupFeedUrl = 'http://techuphq.dev/users/{{ site.twitter-username }}/feed?callback=?';
+
+$.getJSON(techupFeedUrl, function(data) {
+  if (data) {
+    if (data.next_meetup) {
+      data.next_meetup.header = 'Next TechUpHQ Event';
+      $('#event-info').append(tmpl("event_template", data.next_meetup));
+    } else {
+      $('#event-info').append(tmpl("empty_template", { header: 'Next TechUpHQ Event', subtext: 'There are no scheduled events.' }));
+    }
+    if (data.last_meetup) {
+      data.last_meetup.header = 'Last TechUpHQ Event';
+      $('#event-info').append(tmpl("event_template", data.last_meetup));
+    }
+  } else {
+    $('#event-info').append(tmpl("empty_template", { header: 'Next TechUpHQ Event', subtext: 'Please see TechUpHQ for schedule.' }));
+  }
+});
+
+</script>

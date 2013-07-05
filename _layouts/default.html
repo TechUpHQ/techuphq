@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ site.title }}{% if page.title != empty %} - {{ page.title }}{% endif %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TechUpHQ mini-site for @{{ site.twitter-username }}">
+    <meta name="author" content="@{{ site.twitter-username }}">
+
+    <link href="/css/themes/{{ site.theme }}/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/themes/default/bootstrap-responsive.min.css" rel="stylesheet">
+    
+    <link href="/css/font-awesome.css" rel="stylesheet">
+
+    <!--[if IE 7]>
+      <link rel="stylesheet" href="/css/font-awesome-ie7.min.css">
+    <![endif]-->
+
+    <link href="/css/colorbox.css" rel="stylesheet">
+
+    {% if site.pygments %}
+      <link href="/css/pygments/{{ site.pygments-theme }}.css" rel="stylesheet">
+    {% endif %}
+
+    <link href="/css/main.css" rel="stylesheet">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+
+  </head>
+  <body>
+
+    <div class="container-narrow">
+
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container" style="width: auto;">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="http://techuphq.com/users/{{ site.twitter-username }}"><i class="icon-group"></i> {{ site.twitter-username }}</a>
+            <div class="nav-collapse">
+              <ul class="nav pull-right">
+                <li><a href="/">Home</a></li>
+                {% if site.blog-enabled %}
+                <li><a href="/blog">Blog</a></li>
+                {% endif %}
+                {% if site.photo-gallery-enabled %}
+                <li><a href="/photos">Photos</a></li>
+                {% endif %}
+              </ul>
+            </div><!-- /.nav-collapse -->
+          </div>
+        </div><!-- /navbar-inner -->
+      </div>
+
+      {{ content }}
+
+      <hr>
+
+      <div class="footer">
+        <p>&copy; {{ site.twitter-username }} 2013. Site by <a href="http://techuphq.com">TechUp HQ</a>. Hosted on <a href="http://pages.github.com/">GitHub Pages</a>.</p>
+      </div>
+
+    </div>
+
+  </body>
+</html>

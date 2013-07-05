@@ -1,0 +1,21 @@
+---
+layout: default
+---
+
+<div class="row-fluid">
+  <h1>{{ page.title  }}</h1>
+  <p class="post-date">
+		{{ page.date | date_to_string }}
+		{% if page.author != empty %}
+		by {{ page.author }}
+		{% endif %}
+	</p>
+</div>
+
+<hr class="top">
+
+<div class="row-fluid">
+  <div class="span12 post">
+  	{{ content }}
+  </div>
+</div>

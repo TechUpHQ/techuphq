@@ -1,0 +1,150 @@
+---
+layout: default
+title: Photos
+---
+
+<div class="row-fluid">
+  <h1>Photo Albums</h1>
+  <div id="album-name-block" style="display:none;">
+    <h3>
+      <span id="album-name" class="muted"></span> 
+      <button id="album-list-btn" class="btn btn-small" style="margin-bottom:7px;"><i class="icon-chevron-sign-left"></i> Back to Albums</button>
+    </h3>
+  </div>
+</div>
+
+<hr class="top">
+
+<div id="gallery-container">
+
+  <div class="row-fluid" id="album-name-block" style="display:none;">
+    <h3 id="album-name" style="font-style:italic;"></h3>
+    <button id="album-list-btn" class="btn">Back to Albums</button><br>
+  </div>
+
+  <div id="gallery-rows"></div>
+
+</div>
+
+<div id="ajax-loading">
+  <img alt="Loading..." src="/img/loading.gif">
+  <div>Please Wait...</div>
+</div>
+
+<!-- javascript templates for picasa gallery -->
+
+<script id="thumbnail_row_template" type="text/html">
+<div class="row-fluid">
+  <ul class="thumbnails">
+ <%=content%>
+  </li>
+</div>
+</script>
+
+<script id="empty_row_template" type="text/html">
+<div class="row-fluid">
+  <%=content%>
+</div>
+</script>
+
+<script id="album_thumbnail_template" type="text/html">
+<li class="span3">
+  <a href="#" class="thumbnail album-link" data-album-id="<%=id%>" data-original-title="<%=title%>" data-toggle="tooltip" data-placement="top">
+    <img src="<%=thumbnail%>">
+  </a>
+</li>
+</script>
+
+<script id="photo_thumbnail_template" type="text/html">
+<li class="span2">
+  <a href="<%=fullImage%>" class="thumbnail photo-link">
+    <img src="<%=thumbnail%>">
+  </a>
+</li>
+</script>
+
+<script src="/js/jquery.colorbox.js"></script>
+<script src="/js/resig.templates.js"></script>
+<script src="/js/picasa.js"></script>
+
+<script>
+
+var picasaUserId = '{{ site.picasa-user-id }}';
+
+var picasaRender = {
+  albums: function(albums) {
+    $('#gallery-rows').empty();
+    $('#album-name-block').hide();
+    if (albums != null && albums.length > 0) {
+      var currentRow = '';
+      for (var i = 0; i < albums.length; i++) {
+        var album = albums[i];
+        currentRow += tmpl("album_thumbnail_template", album);
+        if((i + 1) % 4 == 0) {
+          picasaRender.renderGalleryRow(currentRow);
+          currentRow = '';
+        }
+      }
+      if (currentRow != '') {
+        // more data is left over, render the row
+        picasaRender.renderGalleryRow(currentRow);
+      }
+      $('.album-link').tooltip();
+    } else {
+      picasaRender.renderEmptyRow("There are no albums to display.");
+    }
+  },
+  photos: function(photos) {
+    $('#gallery-rows').empty();
+    $('#album-name-block').show();
+    if (photos != null && photos.length > 0) {
+      var currentRow = '';
+      for (var i = 0; i < photos.length; i++) {
+        var photo = photos[i];
+        currentRow += tmpl("photo_thumbnail_template", photo);
+        if((i + 1) % 6 == 0) {
+          picasaRender.renderGalleryRow(currentRow);
+          currentRow = '';
+        }
+      }
+      if (currentRow != '') {
+        // more data is left over, render the row
+        picasaRender.renderGalleryRow(currentRow);
+      }
+      $("#gallery-rows .photo-link").colorbox({rel:'photo-link'});
+    } else {
+      picasaRender.renderEmptyRow("There are no photos to display.");
+    }
+  },
+  renderGalleryRow: function(data) {
+    var view = { content : data };
+    var output = tmpl("thumbnail_row_template", view);
+    $('#gallery-rows').append(output);
+  },
+  renderEmptyRow: function(data) {
+    var view = { content : data };
+    var output = tmpl("empty_row_template", view);
+    $('#gallery-rows').append(output);
+  }
+};
+
+$('#gallery-rows').on('click', '.album-link', function() {
+  var albumId = $(this).data('album-id');
+  var albumTitle = $(this).data('original-title');
+  $('#album-name').html(albumTitle);
+  picasa.photos(picasaUserId, albumId, picasaRender.photos);
+});
+
+$('#album-list-btn').on('click', function() {
+  picasa.albums(picasaUserId, picasaRender.albums);
+});
+
+$('#ajax-loading').ajaxStart(function() {
+  $(this).show();
+}).ajaxStop(function() {
+    $(this).hide();
+});
+
+picasa.albums(picasaUserId, picasaRender.albums);
+
+</script>

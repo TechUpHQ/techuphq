@@ -1,0 +1,24 @@
+---
+layout: default
+title: Blog
+---
+
+<div class="row-fluid">
+  <h1>Blog Posts</h1>
+</div>
+
+<hr class="top">
+
+{% for post in site.posts %}
+<div class="row-fluid post">
+  <h2>{{ post.title }}</h2>
+  <p class="post-date">
+    {{ post.date | date_to_string }}
+    {% if post.author != empty %}
+    by {{ post.author }}
+    {% endif %}
+  </p>
+  <p class="post-excerpt">{{ post.excerpt }}</p>
+  <p><a href="{{ post.url }}" class="btn btn-small">Read More &raquo;</a></p>
+</div>
+{% endfor %}
