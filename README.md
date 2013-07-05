@@ -1,7 +1,7 @@
 TechUp HQ GitHub Pages Site Template
 ====
 
-Tech event planners need a great website and this template is here to help you get started. If you are an event planner on TechUp HQ, this site is automatically forked into your account when you enable GitHub integration. GitHub then takes over and uses Jekyll to build your site. GitHub Pages will host your site at: http://yourgithubusername.github.io/techuphq
+Tech event planners need great websites and this template is here to help get them started. If you are an event planner on TechUp HQ, this site is automatically forked into your account when you enable GitHub integration. GitHub then takes over and uses Jekyll to build your site. GitHub Pages will host your site at: http://yourgithubusername.github.io/techuphq
 
 
 Features
