@@ -1,4 +1,4 @@
-[TechUp HQ][techuphq] Integrated Repository
+[TechUp HQ][techuphq] Linked Repository
 ====
 
 The owner of this repository is an event planner on [TechUp HQ][techuphq].
