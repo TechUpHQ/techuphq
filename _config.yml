@@ -17,7 +17,7 @@ description: All tech, all awesome, all the time.
 # Options: amelia, cerulean, cosmo, cyborg, default, flatly, journal, 
 # readable, simplex, slate, spacelab, spruce, superhero, and united.
 
-theme: spacelab
+theme: cerulean
 
 # Set your github and twitter username for user throughout the site.
 
