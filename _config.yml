@@ -9,8 +9,8 @@ title: Tech Meet-ups
 
 # Set a name and description for the main page of your site.
 
-name: San Antonio Web Developers
-description: 3rd Thursday of the Month at Geekdom
+name: Awesome Tech Meet-ups
+description: All tech, all awesome, all the time.
 
 # Site themes by: twitter bootstrap and bootswatch.com.
 # Go to: http://bootswatch.com/ for theme previews.
@@ -28,7 +28,7 @@ github-username: TechUpHQ
 # Next, you will have to create a new blog entry in the _posts directory.
 # See the example file in that directory for details.
 
-blog-enabled: false
+blog-enabled: true
 
 # Do you want a photo gallery on your site? If so, set this to true.
 # This feature requires you to upload your photos to Picasa.
